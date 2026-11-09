@@ -65,3 +65,41 @@ so a test based on averages would be driven by a few very active players.
 - 1 player with 49,854 rounds was removed as a data error
   (impossible number of rounds and inconsistent with retention_1 = False).
 - Sources disagree on whether sum_gamerounds covers the first 7 or 14 days after install.
+
+## Results
+
+### Result: retention_7 (primary metric)
+
+| | gate_30 | gate_40 |
+|---|---|---|
+| retention_7 | 19.02% | 18.20% |
+
+- Difference: −0.82 percentage points (gate_40 is lower).
+  This is larger than the MDE of 0.73 points, so the test had enough power to detect it.
+- The result is significant: |z| = 3.157 is greater than the threshold of 1.96
+  (α = 0.05, two-sided).
+- Gate_30 has higher 7-day retention than gate_40, by 0.82 percentage points.
+
+**Decision:** the decision rule (set before analysis) says:
+"If gate_40 has significantly lower retention_7 → recommend keeping the gate at level 30."
+So I recommend keeping the gate at level 30.
+
+### Result: retention_1 (secondary metric)
+
+| | gate_30 | gate_40 |
+|---|---|---|
+| retention_1 | 44.82% | 44.23% |
+
+- Difference: −0.59 percentage points (gate_40 is lower).
+  This is smaller than the MDE of 1.02 points, so the test was too weak to reliably detect it.
+- The result is not significant: |z| = 1.787 is lower than the threshold of 2.24
+  (α = 0.025, two-sided, Bonferroni correction for secondary metrics).
+- No evidence of a difference in 1-day retention between the groups.
+
+**Role in the decision:** secondary metrics don't change the decision; they help explain it.
+This result fits the idea from the metrics section: most players reach the gate after day 1,
+so day-1 retention is mostly decided before the gate matters.
+
+### Note on data quality
+The group split showed a small imbalance (SRM p = 0.0086),
+so these results should be read with some caution.
