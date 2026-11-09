@@ -30,6 +30,7 @@ Does moving the first gate from level 30 to level 40 change player retention?
 - Sample size: 90,188 players after cleaning
 - Significance level: α = 0.05 for the primary metric
 - Secondary metrics: α = 0.025 each (Bonferroni correction for 2 extra tests)
+- All z-tests were calculated by hand in SQL and verified in Python (statsmodels): the results match.
 
 | Metric | Type | Test |
 |---|---|---|
@@ -76,8 +77,9 @@ so a test based on averages would be driven by a few very active players.
 
 - Difference: −0.82 percentage points (gate_40 is lower).
   This is larger than the MDE of 0.73 points, so the test had enough power to detect it.
-- The result is significant: |z| = 3.157 is greater than the threshold of 1.96
-  (α = 0.05, two-sided).
+- The result is significant: |z| = 3.157 is greater than the threshold of 1.96 (α = 0.05, two-sided).
+ - p-value = 0.0016. 95% confidence interval for the difference: [−1.33, −0.31] percentage points.
+  The whole interval is below 0: even in the best case, gate_40 loses about 0.3 points of 7-day retention.
 - Gate_30 has higher 7-day retention than gate_40, by 0.82 percentage points.
 
 **Decision:** the decision rule (set before analysis) says:
@@ -93,6 +95,8 @@ So I recommend keeping the gate at level 30.
 - Difference: −0.59 percentage points (gate_40 is lower).
   This is smaller than the MDE of 1.02 points, so the test was too weak to reliably detect it.
 - The result is not significant: |z| = 1.787 is lower than the threshold of 2.24
+- p-value = 0.0739. 97.5% confidence interval for the difference: [−1.33, +0.15] percentage points.
+  The interval includes 0, so a zero difference is possible.
   (α = 0.025, two-sided, Bonferroni correction for secondary metrics).
 - No evidence of a difference in 1-day retention between the groups.
 
@@ -103,3 +107,18 @@ so day-1 retention is mostly decided before the gate matters.
 ### Note on data quality
 The group split showed a small imbalance (SRM p = 0.0086),
 so these results should be read with some caution.
+
+### Result: sum_gamerounds (secondary metric)
+
+| | gate_30 | gate_40 |
+|---|---|---|
+| median rounds | 17 | 16 |
+
+- Test: Mann-Whitney U (the data is heavily skewed). No MDE is calculated for this metric.
+- The result is not significant: p = 0.0509 is higher than the threshold of 0.025
+  (α = 0.025, Bonferroni correction for secondary metrics).
+- Probability that a random gate_40 player played more rounds than a random gate_30 player: 49.6%.
+  This is almost exactly 50%, so there is practically no difference between the groups.
+
+**Role in the decision:** no evidence that moving the gate changed how many rounds players play.
+This does not change the decision, which is based on retention_7.
