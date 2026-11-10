@@ -1,5 +1,15 @@
 # A/B Test: Cookie Cats
 
+## Summary
+This A/B test checks whether moving the first gate in Cookie Cats from level 30 to level 40
+changes player retention. 90,188 players were randomly split between the two versions.
+
+**Result:** moving the gate to level 40 significantly lowered 7-day retention,
+from 19.02% to 18.20% (−0.82 percentage points).
+Day-1 retention and rounds played showed no significant difference.
+
+**Recommendation:** keep the gate at level 30.
+
 ## Background
 Cookie Cats is a mobile puzzle game. As players progress, they reach gates:
 points where they must wait or make an in-app purchase to continue.
