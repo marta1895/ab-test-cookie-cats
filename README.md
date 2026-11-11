@@ -10,6 +10,10 @@ Day-1 retention and rounds played showed no significant difference.
 
 **Recommendation:** keep the gate at level 30.
 
+**Dashboard:** [View on Tableau Public](https://public.tableau.com/app/profile/marta.narozhnyak/viz/cookie_cats_dashboard/CookieCatsABtest)
+
+   ![Dashboard](images/dashboard.png)
+
 ## Background
 Cookie Cats is a mobile puzzle game. As players progress, they reach gates:
 points where they must wait or make an in-app purchase to continue.
